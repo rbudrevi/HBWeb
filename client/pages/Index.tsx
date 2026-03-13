@@ -97,7 +97,7 @@ export default function Index() {
             >
               Terms of Service
             </a>
-            <a href="mailto:support@habitbingo.com" className="text-[10px] uppercase tracking-[0.15em] font-geologica text-black/40 hover:text-black/80 transition-colors">
+            <a href="mailto:support@habit.bingo" className="text-[10px] uppercase tracking-[0.15em] font-geologica text-black/40 hover:text-black/80 transition-colors">
               Support
             </a>
           </div>
