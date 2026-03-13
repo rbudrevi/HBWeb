@@ -3,7 +3,7 @@ import BingoCard from "@/components/BingoCard";
 
 export default function Index() {
   return (
-    <div className="min-h-screen flex flex-col relative overflow-x-hidden font-geologica">
+    <div className="min-h-screen flex flex-col relative font-geologica">
       {/* Background image - low-poly geometric gradient */}
       <div className="absolute inset-0 z-0">
         <img
