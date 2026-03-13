@@ -57,15 +57,7 @@ export default function Navbar() {
   }}
 >
       {/* Outer pill */}
-      <div
-        className="w-full max-w-5xl flex items-center px-3 py-2 rounded-3xl"
-        style={{
-          background: "rgba(217,217,217,0.45)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
-          boxShadow: "inset 0 4px 4px rgba(0,0,0,0.25), 0 4px 4px rgba(0,0,0,0.25)",
-        }}
-      >
+   
         {/* Logo pill */}
         <Link
           to="/"
@@ -172,7 +164,6 @@ export default function Navbar() {
             </div>
           )}
         </div>
-      </div>
     </header>
   );
 }
