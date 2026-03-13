@@ -12,15 +12,18 @@ export default function Index() {
           className="w-full h-full object-cover object-center overflow-visible"
           aria-hidden="true"
         />
-<div 
-  className="absolute inset-0 z-1" 
+<div
+  className="w-full text-center px-4 py-12 md:py-16"
   style={{ 
-    // Peak darkness moved to 25%-40% to actually land behind the text
-    background: "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 25%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0) 80%)",
-    h: "85vh",
-    backdropFilter: "blur(1.5px)" 
-  }} 
-/>
+    background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent)",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+  }}
+>
+  <h1 className="...">
+    Small habits. Big wins. One square at a time.
+  </h1>
+</div>
         
         {/* Slight overlay for readability */}
         <div
