@@ -15,7 +15,7 @@ const tileStyles: Record<TileState, { bg: string; iconColor: string; textColor: 
     bg: "rgba(79, 209, 197, 0.65)",
     iconColor: "rgba(255,255,255,0.3)",
     textColor: "rgba(255,255,255,1)",
-    shadow: "0 8px 20px rgba(79,209,197,0.4), inset 0 0 10px rgba(255,255,255,0.2)",
+    shadow: "0 4px 4px rgba(79,209,197,0.4), inset 0 0 10px rgba(255,255,255,0.2)",
   },
 };
 
