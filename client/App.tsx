@@ -9,8 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
-import Privacy from "./pages/Privacy"; 
-import Terms from "./pages/Terms";    
+import Privacy from "./pages/privacy"; 
+import Terms from "./pages/terms";    
 
 const queryClient = new QueryClient();
 
