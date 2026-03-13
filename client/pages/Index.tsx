@@ -48,7 +48,7 @@ export default function Index() {
           <div className="flex-1 flex flex-col lg:flex-row lg:items-start justify-center gap-8 lg:gap-12 px-6 pb-10 lg:px-12">
             {/* Left: Quote */}
             <div
-              className="max-w-sm lg:max-w-md text-center lg:text-left animate-slide-up mt-4
+              className="max-w-sm lg:max-w-md text-center lg:text-left animate-slide-up mt-4"
               style={{
                 backdropFilter: "blur(2px)",
                 WebkitBackdropFilter: "blur(2px)",
