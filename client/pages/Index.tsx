@@ -12,19 +12,17 @@ export default function Index() {
           className="w-full h-full object-cover object-center overflow-visible"
           aria-hidden="true"
         />
-        {/* 2. New Reading Gradient Overlay (The Jelly Secret) */}
-  {/* This starts at 90% opacity gray/white and fades out by 60% of the viewport height */}
-  <div
-    className="absolute inset-0 bg-gradient-to-b from-black/55 to-black/0 via-black/40 h-[70vh] z-1" 
-    style={{ backdropFilter: "blur(1px)" }} 
-  />
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 to-black/0 via-black/40 h-[70vh] z-1" 
+              style={{ backdropFilter: "blur(1px)" }} 
+        />
+        
         {/* Slight overlay for readability */}
         <div
           className="absolute inset-0"
           style={{ background: "rgba(230,230,230,0.10)" }}
         />
       </div>
-</div>
       {/* Content on top of background */}
       <div className="relative z-[100] flex flex-col min-h-screen">
         {/* Navbar */}
