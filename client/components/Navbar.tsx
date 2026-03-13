@@ -63,14 +63,15 @@ export default function Navbar() {
         {/* Logo pill */}
         <Link
           to="/"
-          className="flex items-center px-4 py-2 rounded-2xl shrink-0"
-          style={{
-            background: "rgba(217,217,217,0.45)",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
-            boxShadow: "inset 0 4px 4px rgba(0,0,0,0.25), 0 4px 4px rgba(0,0,0,0.25)",
-          }}
+          className="flex items-center px-4 py-2 shrink-0 hover:opacity-80 transition-opacity"
         >
+          <span
+            className="font-geologica font-bold text-xl md:text-2xl tracking-[0.25em]"
+            style={{ color: "#F000A4" }}
+          >
+            HabitBingo
+          </span>
+        </Link>
           <span
             className="font-geologica font-bold text-xl md:text-2xl tracking-[0.25em]"
             style={{ color: "#F000A4" }}
