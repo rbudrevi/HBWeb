@@ -44,8 +44,6 @@ export default function Index() {
 >
   Small habits. Big wins.<br className="hidden md:block" /> One square at a time.
 </h1>
-              Small habits. Big wins. One square at a time.
-            </h1>
           </div>
 
           {/* Main content: quote + bingo card */}
