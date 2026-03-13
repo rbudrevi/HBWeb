@@ -1,0 +1,134 @@
+import { useState, type ElementType } from "react";
+import { cn } from "@/lib/utils";
+
+export type TileState = "default" | "complete" | "streak" | "skipped";
+
+const tileStyles: Record<TileState, { bg: string; iconColor: string; textColor: string; shadow: string }> = {
+  default: {
+    bg: "rgba(120, 120, 120, 0.20)",
+    iconColor: "rgba(0,0,0,0.08)",
+    textColor: "rgba(0,0,0,0.80)",
+    shadow: "0 4px 4px rgba(0,0,0,0.25)",
+  },
+  complete: {
+    bg: "rgba(52, 199, 89, 0.42)",
+    iconColor: "rgba(255,255,255,0.25)",
+    textColor: "rgba(255,255,255,0.95)",
+    shadow: "0 4px 16px rgba(52,199,89,0.35), 0 4px 4px rgba(0,0,0,0.15)",
+  },
+  streak: {
+    bg: "rgba(240, 0, 164, 0.38)",
+    iconColor: "rgba(255,255,255,0.25)",
+    textColor: "rgba(255,255,255,0.95)",
+    shadow: "0 4px 16px rgba(240,0,164,0.35), 0 4px 4px rgba(0,0,0,0.15)",
+  },
+  skipped: {
+    bg: "rgba(255, 149, 0, 0.38)",
+    iconColor: "rgba(255,255,255,0.25)",
+    textColor: "rgba(255,255,255,0.95)",
+    shadow: "0 4px 16px rgba(255,149,0,0.30), 0 4px 4px rgba(0,0,0,0.15)",
+  },
+};
+
+const stateOrder: TileState[] = ["default", "complete", "streak", "skipped"];
+
+interface HabitTileProps {
+  label: string;
+  icon: ElementType;
+  borderColor?: string;
+  initialState?: TileState;
+}
+
+export default function HabitTile({
+  label,
+  icon: Icon,
+  borderColor,
+  initialState = "default",
+}: HabitTileProps) {
+  const [state, setState] = useState<TileState>(initialState);
+  const [popping, setPopping] = useState(false);
+
+  const handleClick = () => {
+    const idx = stateOrder.indexOf(state);
+    const next = stateOrder[(idx + 1) % stateOrder.length];
+    setState(next);
+    setPopping(true);
+    setTimeout(() => setPopping(false), 350);
+  };
+
+  const style = tileStyles[state];
+
+  return (
+    <button
+      onClick={handleClick}
+      className={cn(
+        "relative flex flex-col items-center justify-end rounded-3xl cursor-pointer select-none w-full aspect-[112/143] focus:outline-none focus-visible:ring-2 focus-visible:ring-habit-pink",
+        popping && "animate-tile-pop"
+      )}
+      style={{
+        background: style.bg,
+        boxShadow: style.shadow,
+        border: borderColor ? `1px solid ${borderColor}` : "1px solid rgba(217,217,217,0.20)",
+        transition: "background 0.4s ease, box-shadow 0.4s ease",
+      }}
+      aria-label={label}
+    >
+      {/* Background Icon */}
+      <div
+        className="absolute inset-0 flex items-center justify-center"
+        aria-hidden="true"
+      >
+        <Icon
+          className="w-2/3 h-2/3"
+          style={{
+            color: style.iconColor,
+            transition: "color 0.4s ease",
+          }}
+          strokeWidth={1}
+        />
+      </div>
+
+      {/* Label */}
+      <span
+        className="relative z-10 text-center font-geologica font-normal leading-tight tracking-wide pb-3 px-2 text-[0.7rem] sm:text-xs md:text-sm"
+        style={{
+          color: style.textColor,
+          letterSpacing: "0.05em",
+          transition: "color 0.4s ease",
+        }}
+      >
+        {label}
+      </span>
+
+      {/* Completion checkmark for complete state */}
+      {state === "complete" && (
+        <span
+          className="absolute top-2 right-2 text-white/80 text-xs font-bold leading-none"
+          aria-hidden="true"
+        >
+          ✓
+        </span>
+      )}
+
+      {/* Streak indicator */}
+      {state === "streak" && (
+        <span
+          className="absolute top-2 right-2 text-white/80 text-xs leading-none"
+          aria-hidden="true"
+        >
+          🔥
+        </span>
+      )}
+
+      {/* Skipped indicator */}
+      {state === "skipped" && (
+        <span
+          className="absolute top-2 right-2 text-white/80 text-xs leading-none"
+          aria-hidden="true"
+        >
+          ○
+        </span>
+      )}
+    </button>
+  );
+}
