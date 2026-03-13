@@ -19,7 +19,19 @@ export default function Index() {
     backdropFilter: "blur(10px)",
     WebkitBackdropFilter: "blur(10px)",
   }}
->
+        >
+<div className="absolute inset-0 z-0">
+  <img src="..." className="w-full h-full object-cover" />
+  
+  {/* Instead of black, use a "Vivid" overlay that darkens only the mid-tones */}
+  <div 
+    className="absolute inset-0 h-[60vh]" 
+    style={{ 
+      background: "linear-gradient(to bottom, rgba(74, 20, 140, 0.2), transparent)", // Subtle deep purple
+      backdropFilter: "contrast(1.2) brightness(0.8) saturate(1.2) blur(2px)" 
+    }} 
+  />
+</div>
   <h1 className="...">
     Small habits. Big wins. One square at a time.
   </h1>
