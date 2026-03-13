@@ -62,11 +62,10 @@ export default function BingoCard({ title = "Stillness Sanctuary" }: BingoCardPr
       </div>
 
       {/* Legend */}
-      <div className="mt-4 flex items-center justify-center gap-3 flex-wrap">
+      {/* Simplified Legend */}
+      <div className="mt-4 flex items-center justify-center gap-4">
         <LegendItem color="rgba(120,120,120,0.3)" label="Pending" />
-        <LegendItem color="rgba(52,199,89,0.5)" label="Complete" />
-        <LegendItem color="rgba(240,0,164,0.45)" label="Streak" />
-        <LegendItem color="rgba(255,149,0,0.45)" label="Skipped" />
+        <LegendItem color="rgba(79, 209, 197, 0.6)" label="Complete" />
       </div>
     </div>
   );
