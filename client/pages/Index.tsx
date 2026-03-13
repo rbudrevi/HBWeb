@@ -25,10 +25,10 @@ export default function Index() {
         <Navbar />
 
         {/* Hero section */}
-        <main className="flex-1 flex flex-col">
+        <main className="flex-1 flex flex-col pt-32 md:pt-44">
           {/* Tagline */}
           <div
-            className="w-full text-center px-4 py-6 md:py-8"
+            className="w-full text-center px-4 pt-4 pb-2 md:pt-6 md:pb-4" // Reduced bottom padding (pb)
             style={{ backdropFilter: "blur(2px)" }}
           >
             <h1
