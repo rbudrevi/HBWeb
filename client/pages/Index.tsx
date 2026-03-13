@@ -17,7 +17,7 @@ export default function Index() {
   className="absolute inset-0 bg-gradient-to-b from-black/5 via-black/45 to-transparent h-[85vh] z-1" 
   style={{ 
     // This custom CSS gives us more control than standard Tailwind classes
-    background: "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.5) 5%, rgba(0,0,0,0.4) 10%, rgba(0,0,0,0) 100%)",
+    background: "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.5) 2%, rgba(0,0,0,0.4) 5%, rgba(0,0,0,0) 100%)",
     backdropFilter: "blur(1.5px)" 
   }} 
 />
