@@ -85,5 +85,24 @@ export default function Index() {
         </main>
       </div>
     </div>
+    <footer className="w-full py-10 mt-auto border-t border-black/5 flex flex-col items-center gap-4">
+  <div className="flex gap-6">
+    <a 
+      href="/privacy" 
+      className="text-xs font-geologica text-black/40 hover:text-black/80 transition-colors"
+    >
+      Privacy Policy
+    </a>
+    <a 
+      href="/terms" 
+      className="text-xs font-geologica text-black/40 hover:text-black/80 transition-colors"
+    >
+      Terms of Service
+    </a>
+  </div>
+  <p className="text-[10px] font-geologica text-black/20">
+    © 2026 HabitBingo. All rights reserved.
+  </p>
+</footer>
   );
 }
