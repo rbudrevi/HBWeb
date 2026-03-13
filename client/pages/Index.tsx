@@ -13,9 +13,14 @@ export default function Index() {
           aria-hidden="true"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 to-black/0 via-black/10 h-[70vh] z-1" 
-              style={{ backdropFilter: "blur(1px)" }} 
-        />
+        <div 
+  className="absolute inset-0 bg-gradient-to-b from-black/5 via-black/45 to-transparent h-[85vh] z-1" 
+  style={{ 
+    // This custom CSS gives us more control than standard Tailwind classes
+    background: "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%)",
+    backdropFilter: "blur(1.5px)" 
+  }} 
+/>
         
         {/* Slight overlay for readability */}
         <div
