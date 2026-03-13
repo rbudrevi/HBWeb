@@ -32,14 +32,18 @@ export default function Index() {
             style={{ backdropFilter: "blur(2px)" }}
           >
             <h1
-              className="font-geologica font-bold tracking-wide leading-tight"
-              style={{
-                color: "#fff",
-                fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
-                textShadow: "0 4px 4px rgba(0,0,0,0.25), 0 4px 4px rgba(0,0,0,0.25)",
-                letterSpacing: "0.02em",
-              }}
-            >
+  className="font-geologica font-bold tracking-tight leading-[1.1]"
+  style={{
+    color: "#fff",
+    /* Increased from 1.5rem -> 2rem and 2.5rem -> 3.5rem */
+    fontSize: "clamp(2rem, 5vw, 3.5rem)", 
+    /* Slightly deeper shadow to help white text pop against light colors */
+    textShadow: "0 4px 12px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2)",
+    letterSpacing: "-0.01em", // Tighter tracking looks better at large sizes
+  }}
+>
+  Small habits. Big wins.<br className="hidden md:block" /> One square at a time.
+</h1>
               Small habits. Big wins. One square at a time.
             </h1>
           </div>
