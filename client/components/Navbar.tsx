@@ -48,7 +48,7 @@ export default function Navbar() {
   }, []);
 
   return (
-      <<header
+      <header
   className="sticky top-0 w-full py-6 px-4 md:px-6 flex items-center justify-center z-[100] overflow-visible transition-all duration-300"
   style={{ 
     background: "rgba(217,217,217,0.15)", // Dropped from 0.50 to 0.15 for more transparency
