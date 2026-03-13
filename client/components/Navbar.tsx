@@ -49,7 +49,7 @@ export default function Navbar() {
 
   return (
       <header
-        className="sticky top-0 w-full py-3 px-4 md:px-6 flex items-center justify-center z-50 overflow-visible transition-all duration-300"
+      className="sticky top-0 w-full py-3 px-4 md:px-6 flex items-center justify-center z-[100] overflow-visible transition-all duration-300"
         style={{ background: "rgba(217,217,217,0.50)", backdropFilter: "blur(8px)" }}
       >
       {/* Outer pill */}
