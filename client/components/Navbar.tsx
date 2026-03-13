@@ -56,9 +56,24 @@ export default function Navbar() {
     WebkitBackdropFilter: "blur(12px)" 
   }}
 >
-      {/* Outer pill */}
    
-        {/* Logo pill */}
+      {/* Logo pill */}
+        <div className="flex items-center gap-3 group cursor-pointer">
+  {/* The "Anchor" - A small, glowing jelly square */}
+  <div className="w-8 h-8 bg-[#F000A4] rounded-lg rotate-12 flex items-center justify-center shadow-[0_0_15px_rgba(240,0,164,0.4)] group-hover:rotate-0 transition-transform duration-500">
+    <div className="w-3 h-3 bg-white rounded-sm" />
+  </div>
+  
+  <span 
+    className="font-geologica font-black text-2xl tracking-tighter"
+    style={{ 
+      color: "#F000A4", 
+      filter: "drop-shadow(0 0 10px rgba(240, 0, 164, 0.2))" 
+    }}
+  >
+    HabitBingo
+  </span>
+</div>
         <Link
           to="/"
           className="flex items-center px-4 py-2 shrink-0 hover:opacity-80 transition-opacity"
