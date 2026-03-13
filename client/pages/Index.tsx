@@ -3,13 +3,13 @@ import BingoCard from "@/components/BingoCard";
 
 export default function Index() {
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden font-geologica">
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden font-geologica">
       {/* Background image - low-poly geometric gradient */}
       <div className="absolute inset-0 z-0">
         <img
           src="https://api.builder.io/api/v1/image/assets/TEMP/504946951a8fc781510fdffdc667c83b41847c58?width=2578"
           alt=""
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center overflow-visible"
           aria-hidden="true"
         />
         {/* Slight overlay for readability */}
