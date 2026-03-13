@@ -25,7 +25,7 @@ export default function Index() {
         <Navbar />
 
         {/* Hero section */}
-        <main className="flex flex-col pt-12 md:pt-44">
+        <main className="flex flex-col pt-12">
           {/* Tagline */}
           <div
             className="w-full text-center px-4 pt-4 pb-2 md:pt-6 md:pb-4" // Reduced bottom padding (pb)
