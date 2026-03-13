@@ -48,7 +48,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="w-full py-3 px-4 md:px-6 flex items-center justify-center"
+    <header className="w-full py-3 px-4 md:px-6 flex items-center justify-center z-50 overflow-visible"
       style={{ background: "rgba(217,217,217,0.50)" }}>
       {/* Outer pill */}
       <div
