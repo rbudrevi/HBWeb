@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import BingoCard from "@/components/BingoCard";
+import { Routes, Route } from "react-router-dom";
 
 export default function Index() {
   return (
@@ -107,5 +108,14 @@ export default function Index() {
         </footer>
       </div>
     </div>
+    <Routes>
+      {/* 1. Your hard-coded homepage */}
+      <Route path="/" element={<LandingPage />} />
+
+      {/* 2. Any other hard-coded pages you built as .tsx files */}
+      {/* <Route path="/privacy" element={<Privacy />} /> */}
+
+      {/* 3. The Catch-all (The Safety Net) */}
+      <Route path="*" e
   );
 }
