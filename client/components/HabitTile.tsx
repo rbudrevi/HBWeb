@@ -63,53 +63,17 @@ export default function HabitTile({
       }}
       aria-label={label}
     >
-      {/* Background Icon */}
-      <div
-        className="absolute inset-0 flex items-center justify-center"
-        aria-hidden="true"
-      >
-        <Icon
-          className="w-2/3 h-2/3"
-          style={{
-            color: style.iconColor,
-            transition: "color 0.4s ease",
-          }}
-          strokeWidth={1}
-        />
-      </div>
-
       {/* Label */}
       <span
-        className="relative z-10 text-center font-geologica font-normal leading-tight tracking-wide pb-3 px-2 text-[0.7rem] sm:text-xs md:text-sm"
+        className="relative z-10 text-center font-geologica font-medium leading-tight tracking-wide px-3 text-[0.85rem] sm:text-base"
         style={{
           color: style.textColor,
-          letterSpacing: "0.05em",
+          letterSpacing: "0.02em",
           transition: "color 0.4s ease",
         }}
       >
         {label}
       </span>
-
-      
-      {/* Streak indicator */}
-      {state === "streak" && (
-        <span
-          className="absolute top-2 right-2 text-white/80 text-xs leading-none"
-          aria-hidden="true"
-        >
-          🔥
-        </span>
-      )}
-
-      {/* Skipped indicator */}
-      {state === "skipped" && (
-        <span
-          className="absolute top-2 right-2 text-white/80 text-xs leading-none"
-          aria-hidden="true"
-        >
-          ○
-        </span>
-      )}
     </button>
   );
 }
