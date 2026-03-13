@@ -45,7 +45,7 @@ export default function Index() {
           </div>
 
           {/* Main content: quote + bingo card */}
-          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 lg:gap-12 px-6 pb-10 lg:px-12">
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 lg:gap-12 px-6 pb-10 lg:px-12 lg:pt-12">
             {/* Left: Quote */}
             <div
               className="max-w-sm lg:max-w-md text-center lg:text-left animate-slide-up mt-4"
