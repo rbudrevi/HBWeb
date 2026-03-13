@@ -8,7 +8,7 @@ import {
   Footprints,
   BookOpen,
   Sunrise,
-  Dumbbell,
+  Hand,
 } from "lucide-react";
 
 const habits = [
@@ -20,7 +20,7 @@ const habits = [
   { label: "Go for a Walk", icon: Footprints },
   { label: "Read 10 pages", icon: BookOpen },
   { label: "Watch the Sunrise", icon: Sunrise },
-  { label: "A gentle Stretch", icon: Dumbbell },
+  { label: "A gentle Stretch", icon: Hand },
 ];
 
 interface BingoCardProps {
