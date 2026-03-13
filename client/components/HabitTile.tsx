@@ -52,7 +52,7 @@ export default function HabitTile({
     <button
       onClick={handleClick}
       className={cn(
-        "relative flex flex-col items-center justify-end rounded-3xl cursor-pointer select-none w-full aspect-[112/143] focus:outline-none focus-visible:ring-2 focus-visible:ring-habit-pink",
+        "relative flex flex-col items-center justify-center rounded-3xl cursor-pointer select-none w-full aspect-[112/143] focus:outline-none focus-visible:ring-2 focus-visible:ring-habit-pink",
         popping && "animate-tile-pop"
       )}
       style={{
