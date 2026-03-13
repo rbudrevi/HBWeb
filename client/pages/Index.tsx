@@ -97,6 +97,9 @@ export default function Index() {
             >
               Terms of Service
             </a>
+            <a href="mailto:support@habitbingo.com" className="text-[10px] uppercase tracking-[0.15em] font-geologica text-black/40 hover:text-black/80 transition-colors">
+              Support
+            </a>
           </div>
           <p className="text-[10px] font-geologica text-black/20">
             © 2026 HabitBingo. All rights reserved.
