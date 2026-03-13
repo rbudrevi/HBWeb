@@ -11,22 +11,11 @@ const tileStyles: Record<TileState, { bg: string; iconColor: string; textColor: 
     shadow: "0 4px 4px rgba(0,0,0,0.25)",
   },
   complete: {
-    bg: "rgba(52, 199, 89, 0.42)",
-    iconColor: "rgba(255,255,255,0.25)",
-    textColor: "rgba(255,255,255,0.95)",
-    shadow: "0 4px 16px rgba(52,199,89,0.35), 0 4px 4px rgba(0,0,0,0.15)",
-  },
-  streak: {
-    bg: "rgba(240, 0, 164, 0.38)",
-    iconColor: "rgba(255,255,255,0.25)",
-    textColor: "rgba(255,255,255,0.95)",
-    shadow: "0 4px 16px rgba(240,0,164,0.35), 0 4px 4px rgba(0,0,0,0.15)",
-  },
-  skipped: {
-    bg: "rgba(255, 149, 0, 0.38)",
-    iconColor: "rgba(255,255,255,0.25)",
-    textColor: "rgba(255,255,255,0.95)",
-    shadow: "0 4px 16px rgba(255,149,0,0.30), 0 4px 4px rgba(0,0,0,0.15)",
+    // Your App's Teal Gradient feel
+    bg: "rgba(79, 209, 197, 0.65)",
+    iconColor: "rgba(255,255,255,0.3)",
+    textColor: "rgba(255,255,255,1)",
+    shadow: "0 8px 20px rgba(79,209,197,0.4), inset 0 0 10px rgba(255,255,255,0.2)",
   },
 };
 
