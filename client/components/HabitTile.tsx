@@ -38,9 +38,10 @@ export default function HabitTile({
   const [popping, setPopping] = useState(false);
 
   const handleClick = () => {
-    const idx = stateOrder.indexOf(state);
-    const next = stateOrder[(idx + 1) % stateOrder.length];
-    setState(next);
+    // Simple toggle logic: if it's default, make it complete. Otherwise, make it default.
+    setState((currentState) => (currentState === "default" ? "complete" : "default"));
+
+    // Keep your popping animation
     setPopping(true);
     setTimeout(() => setPopping(false), 350);
   };
