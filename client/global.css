@@ -89,18 +89,12 @@
     transition: background-color 0.4s ease, transform 0.15s ease, box-shadow 0.3s ease;
   }
 
-  .tile-complete {
-    background: rgba(52, 199, 89, 0.45);
-    transition: background-color 0.4s ease, transform 0.15s ease, box-shadow 0.3s ease;
-  }
+    .tile-complete {
+      background: linear-gradient(135deg, #4fd1c5 0%, #38b2ac 100%);
+      /* Your app teal */
+      box-shadow: 0 0 15px rgba(79, 209, 197, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.3);
+      transform: scale(0.95);
+      /* Slight press-down effect */
+    }
 
-  .tile-streak {
-    background: rgba(240, 0, 164, 0.35);
-    transition: background-color 0.4s ease, transform 0.15s ease, box-shadow 0.3s ease;
-  }
-
-  .tile-skipped {
-    background: rgba(255, 149, 0, 0.35);
-    transition: background-color 0.4s ease, transform 0.15s ease, box-shadow 0.3s ease;
-  }
 }
