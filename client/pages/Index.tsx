@@ -25,7 +25,7 @@ export default function Index() {
         <Navbar />
 
         {/* Hero section */}
-        <main className="flex-1 flex flex-col pt-32 md:pt-44">
+        <main className="flex flex-col pt-32 md:pt-44">
           {/* Tagline */}
           <div
             className="w-full text-center px-4 pt-4 pb-2 md:pt-6 md:pb-4" // Reduced bottom padding (pb)
@@ -45,7 +45,7 @@ export default function Index() {
           </div>
 
           {/* Main content: quote + bingo card */}
-          <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 lg:gap-12 px-6 pb-10 lg:px-12 lg:pt-24">
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 lg:gap-12 px-6 pb-10 lg:px-12">
             {/* Left: Quote */}
             <div
               className="max-w-sm lg:max-w-md text-center lg:text-left animate-slide-up mt-4"
