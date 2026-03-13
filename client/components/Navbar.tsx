@@ -74,17 +74,6 @@ export default function Navbar() {
     HabitBingo
   </span>
 </div>
-        <Link
-          to="/"
-          className="flex items-center px-4 py-2 shrink-0 hover:opacity-80 transition-opacity"
-        >
-          <span
-            className="font-geologica font-bold text-xl md:text-2xl tracking-[0.25em]"
-            style={{ color: "#F000A4" }}
-          >
-            HabitBingo
-          </span>
-        </Link>
         {/* Spacer */}
         <div className="flex-1" />
 
