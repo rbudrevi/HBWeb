@@ -2,7 +2,7 @@ import HabitTile from "./HabitTile";
 import {
   TreePine,
   PersonStanding,
-  UtensilsCrossed,
+  Apple,
   NotebookPen,
   Droplets,
   Footprints,
@@ -14,12 +14,12 @@ import {
 const habits = [
   { label: "Explore in Nature", icon: TreePine },
   { label: "Try a Yoga Class", icon: PersonStanding },
-  { label: "Cook a Healthy Meal", icon: UtensilsCrossed },
+  { label: "Cook a Healthy Meal", icon: Apple},
   { label: "Journal", icon: NotebookPen },
   { label: "Drink Water", icon: Droplets },
   { label: "Go for a Walk", icon: Footprints },
   { label: "Read 10 pages", icon: BookOpen },
-  { label: "Rise with the Sun", icon: Sunrise },
+  { label: "Watch the Sunrise", icon: Sunrise },
   { label: "A gentle Stretch", icon: Dumbbell },
 ];
 
