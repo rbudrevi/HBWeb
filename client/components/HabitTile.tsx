@@ -89,16 +89,7 @@ export default function HabitTile({
         {label}
       </span>
 
-      {/* Completion checkmark for complete state */}
-      {state === "complete" && (
-        <span
-          className="absolute top-2 right-2 text-white/80 text-xs font-bold leading-none"
-          aria-hidden="true"
-        >
-          ✓
-        </span>
-      )}
-
+      
       {/* Streak indicator */}
       {state === "streak" && (
         <span
