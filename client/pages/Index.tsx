@@ -28,7 +28,7 @@ export default function Index() {
         <main className="flex flex-col pt-12">
           {/* Tagline */}
           <div
-            className="w-full text-center px-4 pt-4 pb-2 md:pt-6 md:pb-4" // Reduced bottom padding (pb)
+            className="w-full text-center px-4 pt-4 pb-1 md:pt-6 md:pb-2" // Reduced bottom padding (pb)
             style={{ backdropFilter: "blur(2px)" }}
           >
             <h1
