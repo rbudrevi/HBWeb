@@ -13,7 +13,7 @@ export default function Index() {
           aria-hidden="true"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 to-black/0 via-black/40 h-[70vh] z-1" 
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 to-black/0 via-black/10 h-[70vh] z-1" 
               style={{ backdropFilter: "blur(1px)" }} 
         />
         
