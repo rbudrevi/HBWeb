@@ -20,7 +20,7 @@ export default function Index() {
       </div>
 
       {/* Content on top of background */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative  flex flex-col min-h-screen">
         {/* Navbar */}
         <Navbar />
 
