@@ -79,12 +79,13 @@ export default function Index() {
               </blockquote>
 
               {/* CTA hint */}
-              <p
-                className="mt-6 text-sm font-geologica"
-                style={{ color: "rgba(0,0,0,0.55)", letterSpacing: "0.03em" }}
-              >
-                Tap any tile to mark your progress &rarr;
-              </p>
+           <p
+  className="mt-8 text-sm font-geologica font-bold uppercase tracking-[0.2em] flex items-center justify-center lg:justify-start gap-2"
+  style={{ color: "rgba(26,26,26,0.5)" }} // Matches the charcoal but with transparency
+>
+  Tap a tile to mark progress 
+  <span className="text-[#F000A4] animate-bounce-x">→</span>
+</p>
             </div>
 
             {/* Right: Bingo Card */}
