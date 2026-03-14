@@ -1,0 +1,43 @@
+{{- if .Values.cloudflared.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hbweb.fullname" . }}-cloudflared
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "hbweb.labels" . | nindent 4 }}
+    app.kubernetes.io/component: cloudflared
+spec:
+  replicas: {{ .Values.cloudflared.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "hbweb.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: cloudflared
+  template:
+    metadata:
+      labels:
+        {{- include "hbweb.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: cloudflared
+      annotations:
+        checksum/secret-cloudflared: {{ include (print $.Template.BasePath "/cloudflared-secret.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: cloudflared
+          image: {{ .Values.cloudflared.image }}
+          imagePullPolicy: IfNotPresent
+          command:
+            - cloudflared
+            - tunnel
+            - --no-autoupdate
+            - run
+            - --token
+            - $(TUNNEL_TOKEN)
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "hbweb.fullname" . }}-cloudflared-secret
+                  key: tunnel-token
+          resources:
+            {{- toYaml .Values.cloudflared.resources | nindent 12 }}
+{{- end }}

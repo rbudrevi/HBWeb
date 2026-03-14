@@ -25,3 +25,9 @@ dist-ssr
 
 .config/
 !.env
+
+# Helm secrets (never commit real tokens)
+helm/**/values.secrets.yaml
+
+# Cloudflare tunnel token
+.cftoken

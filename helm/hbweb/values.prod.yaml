@@ -1,0 +1,19 @@
+# Production values for hbweb
+# Merge with: helm upgrade hbweb ./HBWeb/helm/hbweb -f HBWeb/helm/hbweb/values.prod.yaml
+# Secrets: --set secrets.cloudflareTunnelToken=<token>
+
+replicaCount: 1
+
+cloudflared:
+  enabled: true
+  # Public hostname: habit.bingo → this svc in namespace web
+  # Configure the tunnel route in Cloudflare dashboard:
+  #   habit.bingo → http://hbweb.web.svc.cluster.local:3000
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi

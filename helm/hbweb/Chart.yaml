@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hbweb
+description: HabitBingo Web Frontend — React SPA + Express server
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

@@ -1,0 +1,41 @@
+# hbweb Helm chart default values
+
+namespace: web
+
+replicaCount: 1
+
+image:
+  repository: hbweb
+  tag: latest
+  # Air-gap rule: images are imported via k3d image import, never pulled from registry
+  pullPolicy: Never
+
+service:
+  port: 3000
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+
+cloudflared:
+  enabled: false
+  image: cloudflare/cloudflared:latest
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 20m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 64Mi
+
+secrets:
+  # Required when cloudflared.enabled=true
+  # Obtain from Cloudflare dashboard → Zero Trust → Tunnels
+  # Pass via: --set secrets.cloudflareTunnelToken=<token>
+  # Or store in values.secrets.yaml (gitignored)
+  cloudflareTunnelToken: ""
