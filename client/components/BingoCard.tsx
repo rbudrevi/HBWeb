@@ -32,7 +32,7 @@ export default function BingoCard({ title = "Stillness Sanctuary" }: BingoCardPr
     <div
       className="rounded-3xl p-4 sm:p-5 w-full max-w-sm sm:max-w-md"
       style={{
-        background: "rgba(200, 200, 200, 0.60)",
+        background: "rgba(234, 228, 228, 0.6)",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
         boxShadow: "0 4px 4px rgba(0,0,0,0.25)",
