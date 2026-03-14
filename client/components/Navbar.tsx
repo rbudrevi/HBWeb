@@ -63,36 +63,32 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
         
         {/* Logo Group */}
-        <div className="flex items-center gap-4 group cursor-pointer">
+        <div className="flex items-center gap-3 group cursor-pointer">
           {/* The Rounded Square Donut Icon */}
-          <div className="relative w-10 h-10 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-3">
+          <div className="relative w-9 h-9 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
 
             {/* The Frame (The Donut) */}
             <div
-              className="absolute inset-0 border-[3.5px] border-[#F000A4] shadow-[0_0_15px_rgba(240,0,164,0.3)] transition-all duration-300 group-hover:border-[#ff30bc] group-hover:shadow-[0_0_20px_rgba(240,0,164,0.5)]"
+              className="absolute inset-0 border-[3px] border-[#F000A4] shadow-[0_0_15px_rgba(240,0,164,0.3)]"
               style={{
-                borderRadius: "12px", // Matches your Bingo tile radius
-                // Subtle inner glow to make the "edges" of the donut feel 3D
-                boxShadow: "inset 0 0 8px rgba(240,0,164,0.2), 0 0 15px rgba(240,0,164,0.3)"
+                borderRadius: "10px", // Perfect match for a bingo tile corner
               }}
             />
 
-            {/* The "Hole" Highlight - A tiny ghost of a center mark */}
-            <div className="w-1.5 h-1.5 bg-[#F000A4] rounded-[3px] opacity-20 group-hover:opacity-60 transition-opacity" />
+            {/* Center is now completely empty—the background will show through here */}
           </div>
 
           {/* The Typography Stack */}
           <div className="flex flex-col -space-y-1.5">
             <span
-              className="font-geologica font-black text-2xl tracking-tighter text-[#F000A4] transition-colors group-hover:text-[#ff30bc]"
-              style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))" }}
+              className="font-geologica font-black text-2xl tracking-tighter text-[#F000A4]"
             >
               HabitBingo
             </span>
 
-            {/* Subline: Clean, minimalist, and descriptive */}
-            <span className="text-[9px] font-geologica font-bold uppercase tracking-[0.35em] text-black/40 ml-0.5">
-              Master Your Momentum
+            {/* Clean, descriptive subline without the "marketing" fluff */}
+            <span className="text-[10px] font-geologica font-bold uppercase tracking-[0.3em] text-black/40 ml-0.5">
+              Daily Habit Grid
             </span>
           </div>
         </div>
