@@ -85,33 +85,26 @@ This was the root cause of the first crash on prod deployment.
 
 Same as backend: images never pulled from a networked registry. Build locally → gzip transfer over SSH → k3d import.
 
-### Quick Redeploy (code change, no secret change)
+### Deploy
 
 ```bash
-docker build -t hbweb:latest ./
-docker save hbweb:latest | gzip | ssh scott@prod1.infra.habit.bingo docker load
-ssh scott@prod1.infra.habit.bingo "k3d image import hbweb:latest -c bingohabit-prod"
-KUBECONFIG=~/.kube/bingohabit-prod.yaml kubectl rollout restart deployment/hbweb -n web
-KUBECONFIG=~/.kube/bingohabit-prod.yaml kubectl rollout status deployment/hbweb -n web --timeout=120s
-```
-
-### Full Deploy (first time or with secrets)
-
-```bash
-bash scripts/deploy.sh \
-  --tunnel-token <token>
-# or: token in helm/hbweb/values.secrets.yaml (gitignored), then:
 bash scripts/deploy.sh
 ```
 
-See `scripts/deploy.sh --help` (run without args for usage).
+**Prerequisites:** `docker` (local image build) + SSH access to `prod1.infra.habit.bingo`. Nothing else. No local `kubectl`/`helm` required — all k8s/helm operations run on the server via SSH.
 
-### Smoke Test
+**Token resolution order** (script tries each in sequence):
 
+| Priority | Source |
+|----------|--------|
+| 1 | `helm/hbweb/values.secrets.yaml` present locally → scp'd to server |
+| 2 | `hbweb-cloudflared-secret` in running cluster → extracted on server |
+| 3 | `.cftoken` file in repo root (gitignored) |
+| 4 | `--tunnel-token <token>` flag |
+
+**Dry run:**
 ```bash
-KUBECONFIG=~/.kube/bingohabit-prod.yaml kubectl port-forward -n web svc/hbweb 18080:3000 &
-curl http://localhost:18080/api/ping   # → {"message":"ping"}
-curl -o /dev/null -w "%{http_code}" http://localhost:18080/   # → 200
+bash scripts/deploy.sh --dry-run   # renders chart on server, no image build
 ```
 
 ---
@@ -124,17 +117,10 @@ HBWeb has its **own tunnel** (separate from the backend's tunnel).
 |-------|-------|
 | Public hostname | `habit.bingo` |
 | Service (in-cluster) | `http://hbweb.web.svc.cluster.local:3000` |
-| Token file | `.cftoken` (gitignored, never echo to terminal) |
+| Token file | `.cftoken` (gitignored) |
 | Secrets file | `helm/hbweb/values.secrets.yaml` (gitignored) |
 
-**Setup (one-time per token):**
-```bash
-python3 -c "
-token = open('.cftoken').read().strip()
-open('helm/hbweb/values.secrets.yaml','w').write('secrets:\n  cloudflareTunnelToken: '+token+'\n')
-print('ok')
-"
-```
+If seeding a fresh machine: place raw token in `.cftoken`. The deploy script reads it automatically.
 
 Configure in Cloudflare Zero Trust → Networks → Tunnels:
 1. Create tunnel, name it `hbweb-prod`
@@ -153,8 +139,6 @@ Located at `helm/hbweb/`. Key design decisions:
 | `imagePullPolicy` | `Never` | Air-gap rule — images always imported via `k3d image import` |
 | Cloudflared enabled | `true` in prod | HBWeb has its own separate tunnel token |
 | `cloudflare/cloudflared:latest` | Pulled normally | Public image, k3s nodes have internet access |
-
-Deploy with `helm upgrade --install hbweb ./helm/hbweb -n web --create-namespace -f helm/hbweb/values.prod.yaml -f helm/hbweb/values.secrets.yaml`.
 
 ---
 
