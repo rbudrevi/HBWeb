@@ -13,13 +13,7 @@ export default function Index() {
           aria-hidden="true"
         />
         {/* The "Vivid" Darkening Overlay */}
-        <div
-          className="absolute inset-0 h-[60vh]"
-          style={{
-            background: "linear-gradient(to bottom, rgba(74, 20, 140, 0.2), transparent)",
-            backdropFilter: "contrast(1.2) brightness(0.8) saturate(1.2) blur(2px)"
-          }}
-        />
+      
 
         {/* The "Frosty Ribbon" Overlay - Positioned behind the headline */}
         <div
