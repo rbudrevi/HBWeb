@@ -12,12 +12,10 @@ export default function Index() {
           className="w-full h-full object-cover object-center"
           aria-hidden="true"
         />
-        {/* The "Vivid" Darkening Overlay */}
-      
-
+    
         {/* The "Frosty Ribbon" Overlay - Positioned behind the headline */}
         <div
-          className="absolute top-[10%] left-0 w-full h-[35vh]"
+          className="absolute top-[0%] left-0 w-full h-[35vh]"
           style={{
             background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent)",
             backdropFilter: "blur(10px)",
