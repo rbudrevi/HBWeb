@@ -12,7 +12,24 @@ export default function Index() {
           className="w-full h-full object-cover object-center"
           aria-hidden="true"
         />
+        {/* The "Vivid" Darkening Overlay */}
+        <div
+          className="absolute inset-0 h-[60vh]"
+          style={{
+            background: "linear-gradient(to bottom, rgba(74, 20, 140, 0.2), transparent)",
+            backdropFilter: "contrast(1.2) brightness(0.8) saturate(1.2) blur(2px)"
+          }}
+        />
 
+        {/* The "Frosty Ribbon" Overlay - Positioned behind the headline */}
+        <div
+          className="absolute top-[10%] left-0 w-full h-[35vh]"
+          style={{
+            background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+          }}
+        />
         {/* Slight overlay for readability */}
         <div
           className="absolute inset-0"
