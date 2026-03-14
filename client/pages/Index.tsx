@@ -18,8 +18,8 @@ export default function Index() {
           className="absolute top-[0%] left-0 w-full h-[55vh]"
           style={{
             background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent)",
-            backdropFilter: "blur(10px)",
-            WebkitBackdropFilter: "blur(10px)",
+            backdropFilter: "blur(5px)",
+            WebkitBackdropFilter: "blur(5px)",
           }}
         />
         {/* Slight overlay for readability */}
