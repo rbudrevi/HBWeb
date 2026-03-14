@@ -63,35 +63,36 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
         
         {/* Logo Group */}
-        <div className="flex items-center gap-3 group cursor-pointer">
-          {/* The Donut Icon */}
-          <div
-            className="relative w-10 h-10 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-110"
-          >
-            {/* The Outer Ring (Donut) */}
+        <div className="flex items-center gap-4 group cursor-pointer">
+          {/* The Rounded Square Donut Icon */}
+          <div className="relative w-10 h-10 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-3">
+
+            {/* The Frame (The Donut) */}
             <div
-              className="absolute inset-0 border-[4px] border-[#F000A4] rounded-full shadow-[0_0_15px_rgba(240,0,164,0.4)] transition-all duration-300 group-hover:border-[#ff30bc]"
+              className="absolute inset-0 border-[3.5px] border-[#F000A4] shadow-[0_0_15px_rgba(240,0,164,0.3)] transition-all duration-300 group-hover:border-[#ff30bc] group-hover:shadow-[0_0_20px_rgba(240,0,164,0.5)]"
               style={{
-                // Give the ring a slight metallic/jelly sheen
-                background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 70%)",
+                borderRadius: "12px", // Matches your Bingo tile radius
+                // Subtle inner glow to make the "edges" of the donut feel 3D
+                boxShadow: "inset 0 0 8px rgba(240,0,164,0.2), 0 0 15px rgba(240,0,164,0.3)"
               }}
             />
 
-            {/* The Center "Hole" - Small mark to give it a focal point without being heavy */}
-            <div className="w-1.5 h-1.5 bg-[#F000A4] rounded-full opacity-40 group-hover:opacity-100 transition-opacity" />
+            {/* The "Hole" Highlight - A tiny ghost of a center mark */}
+            <div className="w-1.5 h-1.5 bg-[#F000A4] rounded-[3px] opacity-20 group-hover:opacity-60 transition-opacity" />
           </div>
 
           {/* The Typography Stack */}
-          <div className="flex flex-col -space-y-1">
+          <div className="flex flex-col -space-y-1.5">
             <span
               className="font-geologica font-black text-2xl tracking-tighter text-[#F000A4] transition-colors group-hover:text-[#ff30bc]"
               style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))" }}
             >
               HabitBingo
             </span>
-            {/* New, more "functional" subline */}
-            <span className="text-[9px] font-geologica font-bold uppercase tracking-[0.4em] text-black/40 ml-0.5">
-              Gamify Your Growth
+
+            {/* Subline: Clean, minimalist, and descriptive */}
+            <span className="text-[9px] font-geologica font-bold uppercase tracking-[0.35em] text-black/40 ml-0.5">
+              Master Your Momentum
             </span>
           </div>
         </div>
