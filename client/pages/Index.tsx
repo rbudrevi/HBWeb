@@ -15,7 +15,7 @@ export default function Index() {
     
         {/* The "Frosty Ribbon" Overlay - Positioned behind the headline */}
         <div
-          className="absolute top-[5%] left-0 w-full h-[65vh]"
+          className="absolute top-[5%] left-0 w-full h-[75vh]"
           style={{
             background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent)",
             backdropFilter: "blur(5px)",
