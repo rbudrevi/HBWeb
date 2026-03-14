@@ -60,7 +60,7 @@ export default function Navbar() {
       {/* Container: max-w-7xl and mx-auto pins the content so it aligns 
           vertically with your Quote and Bingo Card 
       */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
         
         {/* Logo Group */}
         <div className="flex items-center gap-3 group cursor-pointer">
