@@ -67,7 +67,7 @@ export default function Index() {
               <blockquote
                 className="font-geologica font-normal leading-snug"
                 style={{
-                  color: "#1a1a1a",
+                  color: "#393838ff",
                   fontSize: "clamp(1.1rem, 2.5vw, 1.8rem)",
                   letterSpacing: "0.02em",
                   textShadow: "0 1px 2px rgba(255,255,255,0.8)",
