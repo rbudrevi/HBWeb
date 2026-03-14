@@ -67,10 +67,10 @@ export default function Index() {
               <blockquote
                 className="font-geologica font-normal leading-snug"
                 style={{
-                  color: "#000",
-                  fontSize: "clamp(1.1rem, 2.5vw, 2rem)",
-                  letterSpacing: "0.03em",
-                  textShadow: "0 2px 4px #fff",
+                  color: "#1a1a1a",
+                  fontSize: "clamp(1.1rem, 2.5vw, 1.8rem)",
+                  letterSpacing: "0.02em",
+                  textShadow: "0 1px 2px rgba(255,255,255,0.8)",
                 }}
               >
                 &ldquo;A day focused on mental health and physical rest.
