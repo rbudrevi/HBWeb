@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# HBWeb build + deploy to k3d prod cluster
+# HBWeb build + deploy to native K3s cluster
 # Requires only: SSH access to server + docker (for local image build).
 # All k8s/helm operations execute on the server. No local kubectl or helm needed.
 #
 # Usage: bash scripts/deploy.sh [OPTIONS]
 #
 # Options:
-#   --host           SSH host (default: prod1.infra.habit.bingo)
-#   --cluster        k3d cluster name (default: bingohabit-prod)
-#   --ssh-user       SSH username (default: scott)
+#   --host           SSH host (default: 172.238.50.105)
+#   --ssh-user       SSH username (default: root)
+#   --namespace      Kubernetes namespace (default: hbweb)
 #   --values-file    Production values file (default: helm/hbweb/values.prod.yaml)
 #   --tunnel-token   Cloudflare tunnel token (last resort; normally extracted from cluster)
 #   --dry-run        Render chart on server only, no deploy
@@ -17,9 +17,9 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-HOST="prod1.infra.habit.bingo"
-CLUSTER="bingohabit-prod"
-SSH_USER="scott"
+HOST="172.238.50.105"
+SSH_USER="root"
+NAMESPACE="hbweb"
 VALUES_FILE="${REPO_ROOT}/helm/hbweb/values.prod.yaml"
 LOCAL_SECRETS_FILE="${REPO_ROOT}/helm/hbweb/values.secrets.yaml"
 CFTOKEN_FILE="${REPO_ROOT}/.cftoken"
@@ -35,8 +35,8 @@ srv() { ssh "${SSH_USER}@${HOST}" "$@"; }
 while [[ $# -gt 0 ]]; do
   case $1 in
     --host)          HOST="$2"; shift 2 ;;
-    --cluster)       CLUSTER="$2"; shift 2 ;;
     --ssh-user)      SSH_USER="$2"; shift 2 ;;
+    --namespace)     NAMESPACE="$2"; shift 2 ;;
     --values-file)   VALUES_FILE="$2"; shift 2 ;;
     --tunnel-token)  TUNNEL_TOKEN_ARG="$2"; shift 2 ;;
     --dry-run)       DRY_RUN=true; shift ;;
@@ -83,11 +83,11 @@ if [[ -f "${LOCAL_SECRETS_FILE}" ]]; then
   log "Transferring local secrets to server"
   scp -q "${LOCAL_SECRETS_FILE}" "${SSH_USER}@${HOST}:${REMOTE_SECRETS}"
 else
-  log "Local secrets absent — resolving tunnel token"
+  log "Local secrets absent — resolving tunnel token from namespace ${NAMESPACE}"
 
   # Try cluster first (only the b64-encoded value crosses SSH; decoded on server)
   ENCODED=$(srv "kubectl get secret hbweb-cloudflared-secret \
-    -n web -o jsonpath='{.data.tunnel-token}' 2>/dev/null || true")
+    -n ${NAMESPACE} -o jsonpath='{.data.tunnel-token}' 2>/dev/null || true")
 
   if [[ -n "${ENCODED}" ]]; then
     log "Extracting token from cluster secret"
@@ -122,7 +122,7 @@ fi
 # ─── Dry run ──────────────────────────────────────────────────────────────────
 if [[ "${DRY_RUN}" == true ]]; then
   log "Dry run — rendering chart on server"
-  srv "helm template hbweb ${REMOTE_CHART} -n web -f ${REMOTE_VALUES} -f ${REMOTE_SECRETS}"
+  srv "helm template hbweb ${REMOTE_CHART} -n ${NAMESPACE} --set namespace=${NAMESPACE} -f ${REMOTE_VALUES} -f ${REMOTE_SECRETS}"
   exit 0
 fi
 
@@ -131,30 +131,31 @@ log "Building Docker image hbweb:latest"
 docker build -t hbweb:latest "${REPO_ROOT}"
 
 # ─── Transfer image (air-gap) ─────────────────────────────────────────────────
-log "Streaming image to ${HOST}"
-docker save hbweb:latest | gzip | srv "docker load"
-
-# ─── Import into k3d ──────────────────────────────────────────────────────────
-log "Importing into k3d cluster ${CLUSTER}"
-srv "k3d image import hbweb:latest -c ${CLUSTER}"
+log "Streaming image to ${HOST} into k3s containerd"
+docker save hbweb:latest | gzip | srv "gunzip | k3s ctr images import -"
 
 # ─── Helm deploy ──────────────────────────────────────────────────────────────
 log "Running helm upgrade"
 srv "helm upgrade --install hbweb ${REMOTE_CHART} \
-  --namespace web \
+  --namespace ${NAMESPACE} \
   --create-namespace \
+  --set namespace=${NAMESPACE} \
   -f ${REMOTE_VALUES} \
   -f ${REMOTE_SECRETS}"
 
+# ─── Force rollout restart to pick up new image ───────────────────────────────
+log "Restarting deployment to load the new image"
+srv "kubectl rollout restart deployment/hbweb -n ${NAMESPACE}"
+
 # ─── Wait for rollout ─────────────────────────────────────────────────────────
 log "Waiting for rollout"
-srv "kubectl rollout status deployment/hbweb -n web --timeout=120s"
+srv "kubectl rollout status deployment/hbweb -n ${NAMESPACE} --timeout=120s"
 
 # ─── Smoke test (inside cluster — no port-forward or local curl needed) ───────
 log "Smoke test"
-PING=$(srv "kubectl exec -n web deployment/hbweb -- \
+PING=$(srv "kubectl exec -n ${NAMESPACE} deployment/hbweb -- \
   wget -qO- http://localhost:3000/api/ping 2>/dev/null" || echo "FAILED")
-HTTP=$(srv "kubectl exec -n web deployment/hbweb -- \
+HTTP=$(srv "kubectl exec -n ${NAMESPACE} deployment/hbweb -- \
   wget -qS --spider http://localhost:3000/ 2>&1 | awk '/HTTP\//{print \$2}' | tail -1" \
   || echo "000")
 

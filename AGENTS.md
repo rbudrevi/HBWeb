@@ -76,14 +76,13 @@ This was the root cause of the first crash on prod deployment.
 
 ## Production Deployment
 
-**Target:** `prod1.infra.habit.bingo` (Linode VPS, Debian 13)  
-**Cluster:** `bingohabit-prod` (k3d)  
-**Kubeconfig:** `~/.kube/bingohabit-prod.yaml` (on dev machine)  
-**Namespace:** `web`
+**Target:** `172.238.50.105` (Ubuntu 26.04 LTS)  
+**Cluster:** Native K3s cluster (`v1.36.3+k3s1`)  
+**Namespace:** `hbweb`
 
 ### Air-Gap Rule
 
-Same as backend: images never pulled from a networked registry. Build locally → gzip transfer over SSH → k3d import.
+Same as backend: images never pulled from a networked registry. Build locally → gzip transfer over SSH → import into containerd `k8s.io` namespace using `k3s ctr images import -`.
 
 ### Deploy
 
@@ -91,14 +90,14 @@ Same as backend: images never pulled from a networked registry. Build locally �
 bash scripts/deploy.sh
 ```
 
-**Prerequisites:** `docker` (local image build) + SSH access to `prod1.infra.habit.bingo`. Nothing else. No local `kubectl`/`helm` required — all k8s/helm operations run on the server via SSH.
+**Prerequisites:** `docker` (local image build) + SSH access to `root@172.238.50.105`. Nothing else. No local `kubectl`/`helm` required — all k8s/helm operations run on the server via SSH.
 
 **Token resolution order** (script tries each in sequence):
 
 | Priority | Source |
 |----------|--------|
 | 1 | `helm/hbweb/values.secrets.yaml` present locally → scp'd to server |
-| 2 | `hbweb-cloudflared-secret` in running cluster → extracted on server |
+| 2 | `hbweb-cloudflared-secret` in running cluster (in target namespace) → extracted on server |
 | 3 | `.cftoken` file in repo root (gitignored) |
 | 4 | `--tunnel-token <token>` flag |
 
@@ -106,6 +105,14 @@ bash scripts/deploy.sh
 ```bash
 bash scripts/deploy.sh --dry-run   # renders chart on server, no image build
 ```
+
+**Rollout Restart Gotcha:** Because the image tag is kept as `latest` with `imagePullPolicy: Never`, Kubernetes will not naturally restart/recreate pods during a Helm upgrade if the template spec itself has not changed. Therefore, `deploy.sh` executes an explicit `kubectl rollout restart deployment/hbweb -n <namespace>` to force pod updates.
+
+**Helm Namespace Ownership Gotcha:** If deploying to a new namespace or migrating, ensure existing resources are annotated with the correct Helm namespace. For example, if migrating resources to `hbweb` namespace:
+```bash
+kubectl annotate secret hbweb-cloudflared-secret -n hbweb meta.helm.sh/release-namespace=hbweb --overwrite
+```
+Otherwise, Helm upgrade will fail with ownership metadata conflicts.
 
 ---
 
@@ -116,7 +123,7 @@ HBWeb has its **own tunnel** (separate from the backend's tunnel).
 | Field | Value |
 |-------|-------|
 | Public hostname | `habit.bingo` |
-| Service (in-cluster) | `http://hbweb.web.svc.cluster.local:3000` |
+| Service (in-cluster) | `http://hbweb.hbweb.svc.cluster.local:3000` |
 | Token file | `.cftoken` (gitignored) |
 | Secrets file | `helm/hbweb/values.secrets.yaml` (gitignored) |
 
@@ -125,7 +132,7 @@ If seeding a fresh machine: place raw token in `.cftoken`. The deploy script rea
 Configure in Cloudflare Zero Trust → Networks → Tunnels:
 1. Create tunnel, name it `hbweb-prod`
 2. Copy token → `.cftoken`
-3. Add Public Hostname: `habit.bingo` → Service: `http://hbweb.web.svc.cluster.local:3000`
+3. Add Public Hostname: `habit.bingo` → Service: `http://hbweb.hbweb.svc.cluster.local:3000`
 
 ---
 
@@ -135,8 +142,8 @@ Located at `helm/hbweb/`. Key design decisions:
 
 | Decision | Value | Reason |
 |----------|-------|--------|
-| Namespace | `web` | Separate from backend (`default`) for blast-radius isolation |
-| `imagePullPolicy` | `Never` | Air-gap rule — images always imported via `k3d image import` |
+| Namespace | `hbweb` | Separate from backend (`default`) for blast-radius isolation |
+| `imagePullPolicy` | `Never` | Air-gap rule — images always imported via `k3s ctr images import` |
 | Cloudflared enabled | `true` in prod | HBWeb has its own separate tunnel token |
 | `cloudflare/cloudflared:latest` | Pulled normally | Public image, k3s nodes have internet access |
 
